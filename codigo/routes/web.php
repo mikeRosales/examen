@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::post('/guardarestancia','App\Http\Controllers\EstanciaController@guardarEstancia');
+Route::post('/filtrarestancia','App\Http\Controllers\EstanciaController@filtrarEstancia');
 Route::post('/buscarestancia','App\Http\Controllers\EstanciaController@buscarEstancia');
 Route::get('/buscar', function () {
     return view('buscarestancia');

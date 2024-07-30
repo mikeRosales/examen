@@ -1,18 +1,22 @@
  @extends('layouts.app')
     
         @section('content')
+<form method="Post" action="{{ config('app.url')}}/filtrarestancia">
+                    @csrf
+    <input
+      type="datetime-local"
+      id="inicio"
+      name="inicio"
+       />
 
-        <input
-  type="datetime-local"
-  id="inicio"
-  name="inicio"
-   />
+      <input
+      type="datetime-local"
+      id="final"
+      name="final"
+      />
+                     <button id="buscar" name='buscar' type="submit">Filtrar</button>                                                
+                </form>
 
-  <input
-  type="datetime-local"
-  id="final"
-  name="final"
-  />
             <div class="content">
                 <h1>Estancias</h1>
                 <table id="table_id" class="table table-striped table-dark">

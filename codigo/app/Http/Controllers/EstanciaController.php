@@ -144,6 +144,60 @@ class EstanciaController extends Controller
                  }
                  return view('salidaestancia', ['allEstancias' => $elementos]);
     }
+     public function filtrarEstancia(Request $request)
+    {
+
+
+       $to = \Carbon\Carbon::parse($request->inicio);
+       $from = \Carbon\Carbon::parse($request->final);
+         
+        
+        
+        $data = \App\Models\Estancia::select('estancias.id','estancias.placa','tipo_vehiculos.paga', 'tipo_vehiculos.descripcion', 'estancias.entrada', 'estancias.salida','tipo_vehiculos.cuota_minuto')
+                ->join('tipo_vehiculos', 'estancias.id_tipo_vehiculo', '=', 'tipo_vehiculos.id_tipo')
+                ->whereBetween('estancias.entrada', [$to, $from])
+                ->whereBetween('estancias.salida', [$to, $from])
+                ->get();
+
+                    $elementos = array();
+                 foreach ($data as $estancia){
+                        $miArray = new \App\Models\Estancia();
+                        if($estancia->salida == null){
+                            $to = \Carbon\Carbon::parse($estancia->entrada);
+                            $from = \Carbon\Carbon::parse(\Carbon\Carbon::now());
+                            $diff_in_minutes = $to->diffInMinutes($from);  
+                            $diff_in_minutes = round($diff_in_minutes);
+                        }else
+                        {
+                            $from = \Carbon\Carbon::parse($estancia->salida);
+                            $to = \Carbon\Carbon::parse($estancia->entrada);
+                    
+
+                    
+                            $diff_in_minutes = $to->diffInMinutes($from);    
+                            $diff_in_minutes = round($diff_in_minutes);
+                        }
+                        
+                        $miArray->placa = $estancia->placa;
+                        $costo = 0;
+                       if($estancia->paga==1){
+                            $costo = $estancia->cuota_minuto * $diff_in_minutes;
+                       }
+
+                       $elementos[]=[
+                            'placa' => $estancia->placa,
+                            'tiempo_estacionado' => $diff_in_minutes,
+                            'tipo' => $estancia->descripcion,
+                            'cuota' => $costo];                      
+                 }
+                     // $coleccionElementos = collect($elementos);
+
+            
+
+         return view('viewestancias', ['allEstancias' => $elementos]);
+               
+             
+    }
     public function guardarEstancia(Request $request)
     {
        
