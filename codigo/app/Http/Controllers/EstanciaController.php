@@ -14,7 +14,7 @@ class EstanciaController extends Controller
         $estancias = \App\Models\Estancia::all();
         $collection = collect([]);
         $data = \App\Models\Estancia::select('estancias.placa','tipo_vehiculos.paga', 'tipo_vehiculos.descripcion', 'estancias.entrada', 'estancias.salida','tipo_vehiculos.cuota_minuto')
-                ->join('tipo_vehiculos', 'estancias.id_tipo_vehiculo', '=', 'tipo_vehiculos.id_tipo')
+                ->join('tipo_vehiculos', 'estancias.id_tipo_vehiculo', '=', 'tipo_vehiculos.id')
                 ->get();
                 
                 $elementos = array();
@@ -97,7 +97,7 @@ class EstanciaController extends Controller
          $estancias = \App\Models\Estancia::all();
         $collection = collect([]);
         $data = \App\Models\Estancia::select('estancias.id','estancias.placa','tipo_vehiculos.paga', 'tipo_vehiculos.descripcion', 'estancias.entrada', 'estancias.salida','tipo_vehiculos.cuota_minuto')
-                ->join('tipo_vehiculos', 'estancias.id_tipo_vehiculo', '=', 'tipo_vehiculos.id_tipo')
+                ->join('tipo_vehiculos', 'estancias.id_tipo_vehiculo', '=', 'tipo_vehiculos.id')
                 ->where('estancias.placa','=',$request->placa)
                 ->whereNull('estancias.salida')
                 ->get();
@@ -154,7 +154,7 @@ class EstanciaController extends Controller
         
         
         $data = \App\Models\Estancia::select('estancias.id','estancias.placa','tipo_vehiculos.paga', 'tipo_vehiculos.descripcion', 'estancias.entrada', 'estancias.salida','tipo_vehiculos.cuota_minuto')
-                ->join('tipo_vehiculos', 'estancias.id_tipo_vehiculo', '=', 'tipo_vehiculos.id_tipo')
+                ->join('tipo_vehiculos', 'estancias.id_tipo_vehiculo', '=', 'tipo_vehiculos.id')
                 ->whereBetween('estancias.entrada', [$to, $from])
                 ->whereBetween('estancias.salida', [$to, $from])
                 ->get();

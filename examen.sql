@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 30-07-2024 a las 22:24:27
+-- Tiempo de generación: 31-07-2024 a las 00:11:59
 -- Versión del servidor: 8.3.0
 -- Versión de PHP: 8.2.18
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `estancias` (
 --
 
 INSERT INTO `estancias` (`id`, `placa`, `id_tipo_vehiculo`, `entrada`, `salida`, `tiempo_estacionado`, `cuota`, `updated_at`, `created_at`) VALUES
-(1, 'nvms123', 2, '2024-07-30 13:34:22', '2024-07-30 22:13:57', NULL, NULL, '2024-07-30 22:13:57', '2024-07-30 18:32:57'),
+(1, 'nvms123', 2, '2024-07-30 13:34:22', '2024-07-30 16:13:57', NULL, NULL, '2024-07-30 22:13:57', '2024-07-30 18:32:57'),
 (2, 'mtres12', 1, '2024-07-30 18:51:29', NULL, NULL, NULL, '2024-07-30 18:51:29', '2024-07-30 18:51:29');
 
 -- --------------------------------------------------------
@@ -59,23 +59,24 @@ INSERT INTO `estancias` (`id`, `placa`, `id_tipo_vehiculo`, `entrada`, `salida`,
 
 DROP TABLE IF EXISTS `tipo_vehiculos`;
 CREATE TABLE IF NOT EXISTS `tipo_vehiculos` (
-  `id_tipo` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `paga` tinyint(1) NOT NULL,
   `cuota_minuto` int NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `tipo_vehiculos`
 --
 
-INSERT INTO `tipo_vehiculos` (`id_tipo`, `descripcion`, `paga`, `cuota_minuto`, `created_at`, `updated_at`) VALUES
-(1, 'Oficial', 0, 0, '2024-07-30 12:34:06', '2024-07-30 12:34:06'),
+INSERT INTO `tipo_vehiculos` (`id`, `descripcion`, `paga`, `cuota_minuto`, `created_at`, `updated_at`) VALUES
+(1, 'Oficial', 0, 0, '2024-07-30 12:34:06', '2024-07-31 00:11:19'),
 (2, 'Residente', 1, 1, '2024-07-30 12:34:06', '2024-07-30 12:34:06'),
-(3, 'No Residente', 1, 3, '2024-07-30 12:34:06', '2024-07-30 12:34:06');
+(3, 'No Residente', 1, 3, '2024-07-30 12:34:06', '2024-07-30 12:34:06'),
+(4, 'No Oficial', 1, 10, '2024-07-30 23:42:41', '2024-07-30 23:42:41');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

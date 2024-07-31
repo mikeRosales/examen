@@ -9,7 +9,7 @@ class TipoVehiculo extends Model
 {
          protected $fillable = [
            
-           'id_tipo',
+           'id',
            'descripcion',
            'paga',
            'cuota_minuto',           
